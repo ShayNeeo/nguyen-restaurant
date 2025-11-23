@@ -6,6 +6,7 @@ import Image from "next/image";
 import Script from "next/script";
 import { NavBar } from "@/components/NavBar";
 import { SiteFooter } from "@/components/SiteFooter";
+import { GalleryImages } from "@/components/GalleryImages";
 
 interface ProductsResponse {
   products: Product[];
@@ -161,9 +162,8 @@ function ScrollReveal({ children, className = "" }: { children: ReactNode; class
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ease-out ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      } ${className}`}
+      className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        } ${className}`}
     >
       {children}
     </div>
@@ -173,7 +173,7 @@ function ScrollReveal({ children, className = "" }: { children: ReactNode; class
 function CarouselStory() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState<'left' | 'right' | null>(null);
-  
+
   const carouselImages = [
     { src: "/images/view-1.jpg", alt: "Nhà hàng View 1" },
     { src: "/images/view-2.jpg", alt: "Nhà hàng View 2" },
@@ -313,12 +313,11 @@ function CarouselStory() {
         }
       `}</style>
       <div className="absolute inset-0 rounded-[48px] bg-gradient-to-br from-brand-light/80 to-brand-accent/30 blur-3xl" />
-      
+
       <div className="relative w-full h-full flex items-center justify-center">
         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1/4 h-2/3 z-10 pointer-events-none">
-          <div className={`absolute inset-0 rounded-[24px] overflow-hidden shadow-lg blur-sm border border-brand-light/30 ${
-            slideDirection ? (slideDirection === 'left' ? 'fade-out-left' : 'fade-out-right') : ''
-          }`}>
+          <div className={`absolute inset-0 rounded-[24px] overflow-hidden shadow-lg blur-sm border border-brand-light/30 ${slideDirection ? (slideDirection === 'left' ? 'fade-out-left' : 'fade-out-right') : ''
+            }`}>
             <Image
               src={carouselImages[getPrevIndex()].src}
               alt={carouselImages[getPrevIndex()].alt}
@@ -326,10 +325,9 @@ function CarouselStory() {
               className="object-cover"
             />
           </div>
-          
-          <div className={`absolute inset-0 rounded-[24px] overflow-hidden shadow-lg blur-sm border border-brand-light/30 ${
-            slideDirection ? (slideDirection === 'left' ? 'fade-in-left' : 'fade-in-right') : 'opacity-0'
-          }`}>
+
+          <div className={`absolute inset-0 rounded-[24px] overflow-hidden shadow-lg blur-sm border border-brand-light/30 ${slideDirection ? (slideDirection === 'left' ? 'fade-in-left' : 'fade-in-right') : 'opacity-0'
+            }`}>
             <Image
               src={carouselImages[slideDirection === 'left' ? currentIndex : (getPrevIndex() - 1 + carouselImages.length) % carouselImages.length].src}
               alt={carouselImages[slideDirection === 'left' ? currentIndex : (getPrevIndex() - 1 + carouselImages.length) % carouselImages.length].alt}
@@ -340,10 +338,9 @@ function CarouselStory() {
         </div>
 
         <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-1/2 h-full z-20">
-          <div 
-            className={`absolute inset-0 cursor-pointer rounded-[36px] overflow-hidden border-2 border-brand-light/40 shadow-2xl bg-brand-light/30 backdrop-blur-sm hover:shadow-3xl transition-shadow duration-300 ${
-              slideDirection === 'left' ? 'slide-out-left' : slideDirection === 'right' ? 'slide-out-right' : ''
-            }`}
+          <div
+            className={`absolute inset-0 cursor-pointer rounded-[36px] overflow-hidden border-2 border-brand-light/40 shadow-2xl bg-brand-light/30 backdrop-blur-sm hover:shadow-3xl transition-shadow duration-300 ${slideDirection === 'left' ? 'slide-out-left' : slideDirection === 'right' ? 'slide-out-right' : ''
+              }`}
             onClick={nextImage}
           >
             <Image
@@ -361,10 +358,9 @@ function CarouselStory() {
           </div>
 
           {slideDirection && (
-            <div 
-              className={`absolute inset-0 rounded-[36px] overflow-hidden border-2 border-brand-light/40 shadow-2xl bg-brand-light/30 backdrop-blur-sm ${
-                slideDirection === 'left' ? 'slide-in-from-right' : 'slide-in-from-left'
-              }`}
+            <div
+              className={`absolute inset-0 rounded-[36px] overflow-hidden border-2 border-brand-light/40 shadow-2xl bg-brand-light/30 backdrop-blur-sm ${slideDirection === 'left' ? 'slide-in-from-right' : 'slide-in-from-left'
+                }`}
             >
               <Image
                 src={carouselImages[slideDirection === 'left' ? getNextIndex() : getPrevIndex()].src}
@@ -378,9 +374,8 @@ function CarouselStory() {
         </div>
 
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/4 h-2/3 z-10 pointer-events-none">
-          <div className={`absolute inset-0 rounded-[24px] overflow-hidden shadow-lg blur-sm border border-brand-light/30 ${
-            slideDirection ? (slideDirection === 'left' ? 'fade-out-right' : 'fade-out-left') : ''
-          }`}>
+          <div className={`absolute inset-0 rounded-[24px] overflow-hidden shadow-lg blur-sm border border-brand-light/30 ${slideDirection ? (slideDirection === 'left' ? 'fade-out-right' : 'fade-out-left') : ''
+            }`}>
             <Image
               src={carouselImages[getNextIndex()].src}
               alt={carouselImages[getNextIndex()].alt}
@@ -389,9 +384,8 @@ function CarouselStory() {
             />
           </div>
 
-          <div className={`absolute inset-0 rounded-[24px] overflow-hidden shadow-lg blur-sm border border-brand-light/30 ${
-            slideDirection ? (slideDirection === 'left' ? 'fade-in-right' : 'fade-in-left') : 'opacity-0'
-          }`}>
+          <div className={`absolute inset-0 rounded-[24px] overflow-hidden shadow-lg blur-sm border border-brand-light/30 ${slideDirection ? (slideDirection === 'left' ? 'fade-in-right' : 'fade-in-left') : 'opacity-0'
+            }`}>
             <Image
               src={carouselImages[slideDirection === 'left' ? (getNextIndex() + 1) % carouselImages.length : (getNextIndex() - 1 + carouselImages.length) % carouselImages.length].src}
               alt={carouselImages[slideDirection === 'left' ? (getNextIndex() + 1) % carouselImages.length : (getNextIndex() - 1 + carouselImages.length) % carouselImages.length].alt}
@@ -417,11 +411,10 @@ function CarouselStory() {
                 setSlideDirection(null);
               }, 500);
             }}
-            className={`h-2.5 rounded-full transition-all duration-500 relative ${
-              index === currentIndex
+            className={`h-2.5 rounded-full transition-all duration-500 relative ${index === currentIndex
                 ? "bg-brand w-8 shadow-lg"
                 : "bg-brand-light/40 w-2.5 hover:bg-brand-light/60"
-            }`}
+              }`}
             aria-label={`Đi tới ảnh ${index + 1}`}
           >
             {index === currentIndex && (
@@ -464,85 +457,7 @@ function CarouselStory() {
   );
 }
 
-type GalleryImage = {
-  src: string;
-  alt: string;
-  style: CSSProperties;
-  zIndex: number;
-};
 
-function GalleryImages({ images }: { images: GalleryImage[] }) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 640);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const getSafePosition = (val: string | number | undefined, index: number): string | number | undefined => {
-    if (!isMobile) return val;
-    if (typeof val === 'string' && val.endsWith('%')) {
-      const num = parseFloat(val);
-      // On mobile, ensure minimum spacing - clamp negative values more aggressively
-      // Also adjust based on index to create better spacing
-      if (num < 0) {
-        // Create staggered spacing to prevent overlap
-        const minSpacing = 5 + (index % 3) * 2; // 5%, 7%, 9% minimum spacing
-        return `${minSpacing}%`;
-      }
-      // Ensure positive values don't get too close to edges
-      if (num > 90) return '90%';
-      return val;
-    }
-    return val;
-  };
-
-  const getMobileWidth = (originalWidth: string | number | undefined, index: number): string | number | undefined => {
-    if (!isMobile) return originalWidth;
-    if (typeof originalWidth === 'string' && originalWidth.endsWith('%')) {
-      const num = parseFloat(originalWidth);
-      // Reduce width on mobile to prevent overlap (max 45% per image)
-      const maxWidth = Math.min(num, 45);
-      return `${maxWidth}%`;
-    }
-    return originalWidth;
-  };
-
-  return (
-    <div className="relative h-[500px] sm:h-[520px] lg:h-[640px] px-6 sm:px-0">
-      <div className="absolute inset-0 rounded-[48px] bg-gradient-to-br from-brand-light/80 to-brand-accent/30 blur-3xl" />
-      {images.map((image, index) => (
-        <div
-          key={`${image.src}-${index}`}
-          className="group absolute overflow-hidden rounded-[36px] border border-brand-light/40 bg-brand-light/30 shadow-2xl backdrop-blur-sm transition-transform duration-700 ease-out hover:-translate-y-2 hover:rotate-[1deg]"
-          style={{
-            ...image.style,
-            left: getSafePosition(image.style.left, index),
-            right: getSafePosition(image.style.right, index),
-            top: getSafePosition(image.style.top, index),
-            bottom: getSafePosition(image.style.bottom, index),
-            width: getMobileWidth(image.style.width, index),
-            zIndex: image.zIndex,
-          }}
-        >
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            sizes="(max-width: 768px) 60vw, (max-width: 1200px) 35vw, 30vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-            priority={index === 0}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        </div>
-      ))}
-    </div>
-  );
-}
 
 export default function VietnameseHomePage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -580,43 +495,43 @@ export default function VietnameseHomePage() {
     style: CSSProperties;
     zIndex: number;
   }> = [
-    {
-      src: "/images/goi-cuon.jpg",
-      alt: "Cuốn tươi với rau thơm trên đĩa",
-      style: { top: "0%", left: "5%", width: "32%", aspectRatio: "4 / 5" },
-      zIndex: 5
-    },
-    {
-      src: "/images/bo-kho-goi-cuon.jpg",
-      alt: "Bò Kho trong tô với nước chấm",
-      style: { bottom: "-6%", left: "15%", width: "38%", aspectRatio: "5 / 6" },
-      zIndex: 3
-    },
-    {
-      src: "/images/fried-gyoza.jpg",
-      alt: "Bánh hoàng yến chiên trong chảo gang",
-      style: { top: "10%", right: "-12%", width: "45%", aspectRatio: "3 / 2" },
-      zIndex: 4
-    },
-    {
-      src: "/images/bun-thit-xao.jpg",
-      alt: "Bún Thịt Xào với rau tươi",
-      style: { bottom: "-12%", right: "0%", width: "40%", aspectRatio: "4 / 5" },
-      zIndex: 2
-    },
-    {
-      src: "/images/curry.jpg",
-      alt: "Cà ri Việt thơm ngon trong tô gốm",
-      style: { top: "42%", left: "-10%", width: "36%", aspectRatio: "4 / 5" },
-      zIndex: 1
-    },
-    {
-      src: "/images/steamed-gyoza.jpg",
-      alt: "Bánh hoàng yến hấp với bát nước chấm",
-      style: { top: "-18%", right: "15%", width: "28%", aspectRatio: "3 / 4" },
-      zIndex: 6
-    }
-  ];
+      {
+        src: "/images/goi-cuon.jpg",
+        alt: "Cuốn tươi với rau thơm trên đĩa",
+        style: { top: "0%", left: "5%", width: "32%", aspectRatio: "4 / 5" },
+        zIndex: 5
+      },
+      {
+        src: "/images/bo-kho-goi-cuon.jpg",
+        alt: "Bò Kho trong tô với nước chấm",
+        style: { bottom: "-6%", left: "15%", width: "38%", aspectRatio: "5 / 6" },
+        zIndex: 3
+      },
+      {
+        src: "/images/fried-gyoza.jpg",
+        alt: "Bánh hoàng yến chiên trong chảo gang",
+        style: { top: "10%", right: "-12%", width: "45%", aspectRatio: "3 / 2" },
+        zIndex: 4
+      },
+      {
+        src: "/images/bun-thit-xao.jpg",
+        alt: "Bún Thịt Xào với rau tươi",
+        style: { bottom: "-12%", right: "0%", width: "40%", aspectRatio: "4 / 5" },
+        zIndex: 2
+      },
+      {
+        src: "/images/curry.jpg",
+        alt: "Cà ri Việt thơm ngon trong tô gốm",
+        style: { top: "42%", left: "-10%", width: "36%", aspectRatio: "4 / 5" },
+        zIndex: 1
+      },
+      {
+        src: "/images/steamed-gyoza.jpg",
+        alt: "Bánh hoàng yến hấp với bát nước chấm",
+        style: { top: "-18%", right: "15%", width: "28%", aspectRatio: "3 / 4" },
+        zIndex: 6
+      }
+    ];
 
   return (
     <>
@@ -674,11 +589,11 @@ export default function VietnameseHomePage() {
 
       <NavBar />
       <main className="flex min-h-screen flex-col bg-brand-light">
-        
+
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 px-6">
           <div className="absolute inset-0 bg-gradient-to-br from-brand/5 via-transparent to-brand-accent/10 pointer-events-none" />
-          
+
           <ScrollReveal className="relative z-10 text-center max-w-4xl mx-auto">
             <div className="space-y-6">
               <div className="inline-block">
@@ -686,11 +601,11 @@ export default function VietnameseHomePage() {
                   Gia đình thừa kế từ 1996
                 </span>
               </div>
-              
+
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-brand-dark leading-tight">
                 NGUYỄN<br /><span className="text-brand">Nhà hàng Việt Nam</span>
               </h1>
-              
+
               <p className="text-lg sm:text-xl text-brand-dark/80 max-w-2xl mx-auto leading-relaxed font-light">
                 Chào mừng đến trung tâm quận Schwabing, München. Thưởng thức ẩm thực Việt Nam chính hiệu trong không gian thân thiện với dịch vụ chu đáo và những món ăn tươi ngon.
               </p>
@@ -734,7 +649,7 @@ export default function VietnameseHomePage() {
                   </div>
                 </div>
               </ScrollReveal>
-              
+
               <ScrollReveal>
                 <CarouselStory />
               </ScrollReveal>
@@ -893,9 +808,9 @@ export default function VietnameseHomePage() {
                   <a href="#speisekarte" className="btn-primary">
                     Khám Phá Thực Đơn
                   </a>
-                  <a 
-                    href="https://eat.allo.restaurant/restaurant/nguyen-vietnam-restaurant-munchen" 
-                    target="_blank" 
+                  <a
+                    href="https://eat.allo.restaurant/restaurant/nguyen-vietnam-restaurant-munchen"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="btn-light"
                   >
@@ -932,13 +847,13 @@ export default function VietnameseHomePage() {
               </p>
 
               <div className="flex gap-4 pt-4 flex-wrap justify-center">
-                <a 
+                <a
                   href="tel:+498928803451"
                   className="btn-primary"
                 >
                   Đặt bàn ngay
                 </a>
-                <a 
+                <a
                   href="#gallery"
                   className="btn-light"
                 >
@@ -992,7 +907,7 @@ export default function VietnameseHomePage() {
             </ScrollReveal>
 
             <ScrollReveal className="flex justify-center">
-              <a 
+              <a
                 href="https://eat.allo.restaurant/restaurant/nguyen-vietnam-restaurant-munchen/gift-cards"
                 target="_blank"
                 rel="noopener noreferrer"
