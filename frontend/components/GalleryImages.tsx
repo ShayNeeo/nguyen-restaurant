@@ -31,7 +31,7 @@ export function GalleryImages({ images }: { images: GalleryImage[] }) {
                 <div className="absolute inset-0 rounded-[48px] bg-gradient-to-br from-brand-light/80 to-brand-accent/30 blur-3xl opacity-50" />
 
                 {/* Mobile/Tablet Carousel View */}
-                <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 pb-8 scrollbar-hide -mx-4 sm:mx-0 items-center">
+                <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 scrollbar-hide items-center">
                     {images.map((image, index) => (
                         <div
                             key={`${image.src}-${index}`}
