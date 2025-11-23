@@ -291,8 +291,8 @@ function CarouselSection() {
                     key={index}
                     onClick={() => setCurrentIndex(index)}
                     className={`h-2.5 rounded-full transition-all duration-500 ${index === currentIndex
-                        ? "bg-brand w-8"
-                        : "bg-white/40 w-2.5 hover:bg-white/60"
+                      ? "bg-brand w-8"
+                      : "bg-white/40 w-2.5 hover:bg-white/60"
                       }`}
                     aria-label={`Go to image ${index + 1}`}
                   />
@@ -580,8 +580,8 @@ function CarouselStory() {
               }, 500);
             }}
             className={`h-2.5 rounded-full transition-all duration-500 relative ${index === currentIndex
-                ? "bg-brand w-8 shadow-lg"
-                : "bg-white/40 w-2.5 hover:bg-white/60"
+              ? "bg-brand w-8 shadow-lg"
+              : "bg-white/40 w-2.5 hover:bg-white/60"
               }`}
             aria-label={`Go to image ${index + 1}`}
           >
@@ -1017,7 +1017,7 @@ export default function HomePage() {
                 </div>
               </ScrollReveal>
 
-              <ScrollReveal>
+              <ScrollReveal className="min-w-0">
                 <GalleryImages images={galleryImages} />
               </ScrollReveal>
             </div>

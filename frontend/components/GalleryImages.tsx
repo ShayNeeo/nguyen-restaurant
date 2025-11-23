@@ -27,7 +27,7 @@ export function GalleryImages({ images }: { images: GalleryImage[] }) {
 
     if (isMobile) {
         return (
-            <div className="relative w-full py-8">
+            <div className="relative w-full py-8 max-w-[100vw] overflow-hidden">
                 <div className="absolute inset-0 rounded-[48px] bg-gradient-to-br from-brand-light/80 to-brand-accent/30 blur-3xl opacity-50" />
 
                 {/* Mobile/Tablet Carousel View */}
