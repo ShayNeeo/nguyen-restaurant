@@ -465,8 +465,32 @@ export default function VietnameseHomePage() {
     const timer = setTimeout(() => {
       const newsletterSection = document.getElementById("newsletter");
       if (newsletterSection) {
+        // Check if user hasn't scrolled too far already
         if (window.scrollY < 100) {
-          newsletterSection.scrollIntoView({ behavior: "smooth" });
+          const targetPosition = newsletterSection.getBoundingClientRect().top + window.scrollY;
+          const startPosition = window.scrollY;
+          const distance = targetPosition - startPosition;
+          const duration = 1500; // 1.5 seconds
+          let startTime: number | null = null;
+
+          const animation = (currentTime: number) => {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+
+            // Easing function (easeInOutQuad)
+            const ease = progress < 0.5
+              ? 2 * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+            window.scrollTo(0, startPosition + distance * ease);
+
+            if (timeElapsed < duration) {
+              requestAnimationFrame(animation);
+            }
+          };
+
+          requestAnimationFrame(animation);
         }
       }
     }, 5000);
