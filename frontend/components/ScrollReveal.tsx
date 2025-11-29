@@ -21,7 +21,7 @@ export function ScrollReveal({ children, className = "" }: { children: ReactNode
     return (
         <div
             ref={ref}
-            className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            className={`transition-all duration-[3000ms] ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 } ${className}`}
         >
             {children}
