@@ -1,4 +1,4 @@
-1import React, { useState } from "react";
+import React, { useState } from "react";
 import { ScrollReveal } from "./ScrollReveal";
 
 interface NewsletterContent {
