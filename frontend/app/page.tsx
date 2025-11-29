@@ -7,6 +7,8 @@ import Script from "next/script";
 import { NavBar } from "@/components/NavBar";
 import { SiteFooter } from "@/components/SiteFooter";
 import { GalleryImages } from "@/components/GalleryImages";
+import { NewsletterSection } from "@/components/NewsletterSection";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 interface ProductsResponse {
   products: Product[];
@@ -143,32 +145,7 @@ const restaurantSchema = {
   currenciesAccepted: "EUR"
 };
 
-function ScrollReveal({ children, className = "" }: { children: ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        } ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
 
 function CarouselSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -650,6 +627,27 @@ export default function HomePage() {
       }
     };
     fetchProducts();
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Optional: Cancel auto-scroll if user scrolls manually? 
+      // For now, we rely on the browser's native behavior where user interaction interrupts smooth scroll.
+      // But we might want to cancel the timeout if the user has already scrolled past the hero.
+    };
+
+    const timer = setTimeout(() => {
+      const newsletterSection = document.getElementById("newsletter");
+      if (newsletterSection) {
+        // Check if user hasn't scrolled too far already
+        if (window.scrollY < 100) {
+          newsletterSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }, 5000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const formatPrice = (amount: number, currency?: string) =>
@@ -796,6 +794,9 @@ export default function HomePage() {
             </div>
           </ScrollReveal>
         </section>
+
+        {/* Newsletter Section */}
+        <NewsletterSection />
 
         {/* Story Section */}
         <section className="py-20 sm:py-32 bg-brand-light">

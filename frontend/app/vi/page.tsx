@@ -7,6 +7,8 @@ import Script from "next/script";
 import { NavBar } from "@/components/NavBar";
 import { SiteFooter } from "@/components/SiteFooter";
 import { GalleryImages } from "@/components/GalleryImages";
+import { NewsletterSection } from "@/components/NewsletterSection";
+import { ScrollReveal } from "@/components/ScrollReveal";
 
 interface ProductsResponse {
   products: Product[];
@@ -143,32 +145,7 @@ const restaurantSchema = {
   currenciesAccepted: "EUR"
 };
 
-function ScrollReveal({ children, className = "" }: { children: ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        } ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
 
 function CarouselStory() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -412,8 +389,8 @@ function CarouselStory() {
               }, 500);
             }}
             className={`h-2.5 rounded-full transition-all duration-500 relative ${index === currentIndex
-                ? "bg-brand w-8 shadow-lg"
-                : "bg-brand-light/40 w-2.5 hover:bg-brand-light/60"
+              ? "bg-brand w-8 shadow-lg"
+              : "bg-brand-light/40 w-2.5 hover:bg-brand-light/60"
               }`}
             aria-label={`Đi tới ảnh ${index + 1}`}
           >
@@ -481,6 +458,20 @@ export default function VietnameseHomePage() {
       }
     };
     fetchProducts();
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const newsletterSection = document.getElementById("newsletter");
+      if (newsletterSection) {
+        if (window.scrollY < 100) {
+          newsletterSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }, 5000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const formatPrice = (amount: number, currency?: string) =>
@@ -621,6 +612,18 @@ export default function VietnameseHomePage() {
             </div>
           </ScrollReveal>
         </section>
+
+        {/* Newsletter Section */}
+        <NewsletterSection content={{
+          tagline: "Cập nhật độc quyền",
+          headline: "Luôn cập nhật thông tin",
+          description: "Đăng ký nhận bản tin của chúng tôi để biết các điểm nổi bật theo mùa, sự kiện đặc biệt và tin tức ẩm thực từ nhà bếp của chúng tôi.",
+          placeholder: "Địa chỉ email của bạn",
+          buttonText: "Đăng ký",
+          buttonLoading: "Đang gửi...",
+          buttonSuccess: "Đã đăng ký!",
+          successMessage: "Cảm ơn bạn đã đăng ký!"
+        }} />
 
         {/* Story Section */}
         <section className="py-20 sm:py-32 bg-brand-light">
