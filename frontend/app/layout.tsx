@@ -32,7 +32,12 @@ export const metadata: Metadata = {
     "authentic vietnamese food germany",
     "pho münchen schwabing",
     "vietnamesische speisekarte",
-    "vietnamesisches restaurant vietnamese restaurant munich"
+    "vietnamesisches restaurant vietnamese restaurant munich",
+    "Schwabing",
+    "Mittagstisch",
+    "Abendessen",
+    "Takeaway",
+    "Asiatisches Restaurant"
   ],
   category: "Restaurant",
   authors: [{ name: "Nguyen Vietnam Restaurant" }],
@@ -62,6 +67,24 @@ export const metadata: Metadata = {
         width: 663,
         height: 510,
         alt: "Nguyen Vietnam Restaurant München-Schwabing"
+      },
+      {
+        url: "/images/view-8.jpg",
+        width: 680,
+        height: 510,
+        alt: "Gemütliches Ambiente im Nguyen Restaurant"
+      },
+      {
+        url: "/images/goi-cuon.jpg",
+        width: 597,
+        height: 510,
+        alt: "Frische Sommerrollen"
+      },
+      {
+        url: "/images/pho-chay.jpg",
+        width: 1994,
+        height: 1995,
+        alt: "Traditionelle Pho Suppe"
       }
     ]
   },
@@ -112,7 +135,7 @@ export const metadata: Metadata = {
     "geo.position": "48.1598;11.5812",
     "geo.placename": "München",
     "geo.region": "DE-BY",
-    "msapplication-TileColor": "#A0644E",
+    "msapplication-TileColor": "#043927",
     "msapplication-config": "/browserconfig.xml"
   }
 };

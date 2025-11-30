@@ -777,7 +777,7 @@ export default function HomePage() {
         })}
       </Script>
 
-      <NavBar />
+      <NavBar lang="de" />
       <main className="flex min-h-screen flex-col bg-brand-light">
 
         {/* Hero Section */}

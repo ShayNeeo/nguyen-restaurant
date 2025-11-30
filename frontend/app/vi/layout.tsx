@@ -14,7 +14,12 @@ export const metadata: Metadata = {
     "ẩm thực Việt chính hiệu",
     "Phở München Schwabing",
     "thực đơn Việt Nam",
-    "nhà hàng Việt Nam Đức"
+    "nhà hàng Việt Nam Đức",
+    "Schwabing",
+    "Ăn trưa",
+    "Ăn tối",
+    "Mang về",
+    "Nhà hàng Á"
   ],
   category: "Restaurant",
   authors: [{ name: "Nhà hàng Nguyễn" }],
@@ -44,6 +49,24 @@ export const metadata: Metadata = {
         width: 663,
         height: 510,
         alt: "Nhà hàng Nguyễn München-Schwabing"
+      },
+      {
+        url: "/images/view-8.jpg",
+        width: 680,
+        height: 510,
+        alt: "Không gian ấm cúng tại Nhà hàng Nguyễn"
+      },
+      {
+        url: "/images/goi-cuon.jpg",
+        width: 597,
+        height: 510,
+        alt: "Gỏi cuốn tươi ngon"
+      },
+      {
+        url: "/images/pho-chay.jpg",
+        width: 1994,
+        height: 1995,
+        alt: "Phở truyền thống"
       }
     ]
   },
@@ -94,7 +117,7 @@ export const metadata: Metadata = {
     "geo.position": "48.1598;11.5812",
     "geo.placename": "München",
     "geo.region": "DE-BY",
-    "msapplication-TileColor": "#A0644E",
+    "msapplication-TileColor": "#043927",
     "msapplication-config": "/browserconfig.xml"
   }
 };

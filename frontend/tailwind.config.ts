@@ -9,7 +9,7 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: "#017048", // Primary - Deep Forest Green
+          DEFAULT: "#043927", // Primary - Sacramento Green
           accent: "#B08D55", // Secondary - Toasted Gold / Muted Bronze
           light: "#FDFBF7", // Background - Rice Paper / Warm Off-White
           dark: "#2C3330", // Text Body - Charcoal Green
@@ -28,11 +28,11 @@ const config: Config = {
         display: ["var(--font-forum)", "serif"]
       },
       boxShadow: {
-        soft: "0 10px 30px rgba(1, 112, 72, 0.12)"
+        soft: "0 10px 30px rgba(4, 57, 39, 0.12)"
       },
       backgroundImage: {
         "hero-overlay":
-          "linear-gradient(135deg, rgba(1, 112, 72, 0.85), rgba(44, 51, 48, 0.6))"
+          "linear-gradient(135deg, rgba(4, 57, 39, 0.85), rgba(44, 51, 48, 0.6))"
       },
       animation: {
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",

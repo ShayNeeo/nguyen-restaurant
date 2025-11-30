@@ -602,7 +602,7 @@ export default function VietnameseHomePage() {
         })}
       </Script>
 
-      <NavBar />
+      <NavBar lang="vi" />
       <main className="flex min-h-screen flex-col bg-brand-light">
 
         {/* Hero Section */}

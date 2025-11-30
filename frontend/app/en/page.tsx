@@ -602,7 +602,7 @@ export default function EnglishHomePage() {
         })}
       </Script>
 
-      <NavBar />
+      <NavBar lang="en" />
       <main className="flex min-h-screen flex-col bg-brand-light">
 
         {/* Hero Section */}

@@ -14,7 +14,12 @@ export const metadata: Metadata = {
     "authentic Vietnamese food Germany",
     "Pho Munich Schwabing",
     "Vietnamese menu",
-    "Vietnam restaurant Munich English"
+    "Vietnam restaurant Munich English",
+    "Schwabing",
+    "Lunch",
+    "Dinner",
+    "Takeaway",
+    "Asian Restaurant"
   ],
   category: "Restaurant",
   authors: [{ name: "Nguyen Vietnam Restaurant" }],
@@ -44,6 +49,24 @@ export const metadata: Metadata = {
         width: 663,
         height: 510,
         alt: "Nguyen Vietnam Restaurant Munich-Schwabing"
+      },
+      {
+        url: "/images/view-8.jpg",
+        width: 680,
+        height: 510,
+        alt: "Cozy Ambiance at Nguyen Restaurant"
+      },
+      {
+        url: "/images/goi-cuon.jpg",
+        width: 597,
+        height: 510,
+        alt: "Fresh Summer Rolls"
+      },
+      {
+        url: "/images/pho-chay.jpg",
+        width: 1994,
+        height: 1995,
+        alt: "Traditional Pho Soup"
       }
     ]
   },
@@ -94,7 +117,7 @@ export const metadata: Metadata = {
     "geo.position": "48.1598;11.5812",
     "geo.placename": "Munich",
     "geo.region": "DE-BY",
-    "msapplication-TileColor": "#A0644E",
+    "msapplication-TileColor": "#043927",
     "msapplication-config": "/browserconfig.xml"
   }
 };

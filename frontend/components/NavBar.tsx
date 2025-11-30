@@ -1,22 +1,42 @@
- "use client";
+"use client";
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { CartButton } from "./cart/CartButton";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
-const navLinks = [
-  { label: "Über uns", href: "#geschichten" },
-  { label: "Speisekarte", href: "#speisekarte" },
-  { label: "Galerie", href: "#galerie" },
-  { label: "Anfahrt", href: "#anfahrt" }
-];
+interface NavBarProps {
+  lang?: "de" | "en" | "vi";
+}
 
-export function NavBar() {
+const navLinks = {
+  de: [
+    { label: "Über uns", href: "#geschichten" },
+    { label: "Speisekarte", href: "#speisekarte" },
+    { label: "Galerie", href: "#galerie" },
+    { label: "Anfahrt", href: "#anfahrt" }
+  ],
+  en: [
+    { label: "About Us", href: "#geschichten" },
+    { label: "Menu", href: "#speisekarte" },
+    { label: "Gallery", href: "#galerie" },
+    { label: "Location", href: "#anfahrt" }
+  ],
+  vi: [
+    { label: "Về chúng tôi", href: "#geschichten" },
+    { label: "Thực đơn", href: "#speisekarte" },
+    { label: "Thư viện", href: "#galerie" },
+    { label: "Địa chỉ", href: "#anfahrt" }
+  ]
+};
+
+export function NavBar({ lang = "de" }: NavBarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [atTop, setAtTop] = useState(true);
   const lastScroll = useRef(0);
+
+  const links = navLinks[lang];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,14 +67,14 @@ export function NavBar() {
       <header className={`${baseClasses} ${background} ${hidden ? "-translate-y-full" : "translate-y-0"}`}>
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
           <Link
-            href="#hero"
+            href={lang === "de" ? "/" : `/${lang}`}
             className="font-display text-2xl text-white drop-shadow transition hover:text-brand-accent"
           >
             Nguyen Restaurant
           </Link>
 
           <nav className="hidden items-center gap-4 text-sm font-medium text-white sm:flex">
-            {navLinks.map((link) => (
+            {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -106,18 +126,16 @@ export function NavBar() {
       </header>
 
       <div
-        className={`fixed inset-0 z-40 bg-brand-dark/80 backdrop-blur transition-opacity duration-300 sm:hidden ${
-          mobileOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-        }`}
+        className={`fixed inset-0 z-40 bg-brand-dark/80 backdrop-blur transition-opacity duration-300 sm:hidden ${mobileOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+          }`}
         onClick={() => setMobileOpen(false)}
       />
 
       <nav
-        className={`fixed inset-x-0 top-0 z-50 mt-[72px] flex origin-top flex-col gap-4 bg-gray-950/95 px-6 py-10 text-sm text-white shadow-2xl transition-transform duration-300 sm:hidden ${
-          mobileOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0"
-        }`}
+        className={`fixed inset-x-0 top-0 z-50 mt-[72px] flex origin-top flex-col gap-4 bg-gray-950/95 px-6 py-10 text-sm text-white shadow-2xl transition-transform duration-300 sm:hidden ${mobileOpen ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0"
+          }`}
       >
-        {navLinks.map((link) => (
+        {links.map((link) => (
           <a
             key={link.href}
             href={link.href}
@@ -139,7 +157,7 @@ export function NavBar() {
           onClick={() => setMobileOpen(false)}
           className="rounded-full border border-brand-light/20 px-4 py-2 text-center text-base font-semibold uppercase tracking-[0.35em] text-white transition hover:border-yellow-300 hover:text-brand-accent"
         >
-          Gutscheine
+          {lang === "de" ? "Gutscheine" : lang === "en" ? "Coupons" : "Phiếu giảm giá"}
         </a>
         <div className="flex justify-center border-t border-brand-light/10 pt-4">
           <LanguageSwitcher />
