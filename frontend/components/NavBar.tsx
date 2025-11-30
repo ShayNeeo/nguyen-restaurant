@@ -83,12 +83,7 @@ export function NavBar({ lang = "de" }: NavBarProps) {
                 {link.label}
               </a>
             ))}
-            <a
-              href="tel:+498928803451"
-              className="rounded-full bg-brand-light/20 px-4 py-2 text-sm font-semibold uppercase tracking-[0.35em] transition hover:bg-brand-light/30"
-            >
-              089 28803451
-            </a>
+
             <LanguageSwitcher />
             <CartButton />
           </nav>
@@ -145,13 +140,7 @@ export function NavBar({ lang = "de" }: NavBarProps) {
             {link.label}
           </a>
         ))}
-        <a
-          href="tel:+498928803451"
-          onClick={() => setMobileOpen(false)}
-          className="rounded-full bg-brand-light/20 px-4 py-2 text-center text-base font-semibold uppercase tracking-[0.35em] text-white transition hover:bg-brand-light/30"
-        >
-          089 28803451
-        </a>
+
         <a
           href="/coupon"
           onClick={() => setMobileOpen(false)}
