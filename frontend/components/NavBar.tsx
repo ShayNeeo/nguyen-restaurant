@@ -13,20 +13,20 @@ const navLinks = {
   de: [
     { label: "Über uns", href: "#geschichten" },
     { label: "Speisekarte", href: "#speisekarte" },
-    { label: "Galerie", href: "#galerie" },
-    { label: "Anfahrt", href: "#anfahrt" }
+    { label: "Unser Restaurant", href: "#gallery" },
+    { label: "Anfahrt", href: "/location" }
   ],
   en: [
     { label: "About Us", href: "#geschichten" },
     { label: "Menu", href: "#speisekarte" },
-    { label: "Gallery", href: "#galerie" },
-    { label: "Location", href: "#anfahrt" }
+    { label: "Our Restaurant", href: "#gallery" },
+    { label: "Location", href: "/en/location" }
   ],
   vi: [
     { label: "Về chúng tôi", href: "#geschichten" },
     { label: "Thực đơn", href: "#speisekarte" },
-    { label: "Thư viện", href: "#galerie" },
-    { label: "Địa chỉ", href: "#anfahrt" }
+    { label: "Nhà hàng", href: "#gallery" },
+    { label: "Địa chỉ", href: "/vi/location" }
   ]
 };
 

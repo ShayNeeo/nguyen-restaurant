@@ -359,4 +359,40 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Location Page - German -->
+  <url>
+    <loc>https://nguyenrestaurant.de/location</loc>
+    <lastmod>2025-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://nguyenrestaurant.de/location" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nguyenrestaurant.de/en/location" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://nguyenrestaurant.de/vi/location" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nguyenrestaurant.de/location" />
+  </url>
+
+  <!-- Location Page - English -->
+  <url>
+    <loc>https://nguyenrestaurant.de/en/location</loc>
+    <lastmod>2025-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://nguyenrestaurant.de/location" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nguyenrestaurant.de/en/location" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://nguyenrestaurant.de/vi/location" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nguyenrestaurant.de/location" />
+  </url>
+
+  <!-- Location Page - Vietnamese -->
+  <url>
+    <loc>https://nguyenrestaurant.de/vi/location</loc>
+    <lastmod>2025-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://nguyenrestaurant.de/location" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://nguyenrestaurant.de/en/location" />
+    <xhtml:link rel="alternate" hreflang="vi" href="https://nguyenrestaurant.de/vi/location" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nguyenrestaurant.de/location" />
+  </url>
+
 </urlset>
