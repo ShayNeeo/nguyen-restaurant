@@ -6,17 +6,25 @@ export function Preloader() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
+    const minTime = 1000;
+    const startTime = Date.now();
+
+    const complete = () => {
+      const elapsed = Date.now() - startTime;
+      const remaining = Math.max(0, minTime - elapsed);
+      setTimeout(() => setIsReady(true), remaining);
+    };
+
     if (document.readyState === "complete") {
-      setIsReady(true);
+      complete();
       return;
     }
 
-    const handleLoad = () => setIsReady(true);
-    window.addEventListener("load", handleLoad);
-    const timeout = window.setTimeout(() => setIsReady(true), 2000);
+    window.addEventListener("load", complete);
+    const timeout = window.setTimeout(complete, 2500);
 
     return () => {
-      window.removeEventListener("load", handleLoad);
+      window.removeEventListener("load", complete);
       window.clearTimeout(timeout);
     };
   }, []);
