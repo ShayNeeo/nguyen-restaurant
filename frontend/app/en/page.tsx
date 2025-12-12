@@ -875,7 +875,9 @@ export default function EnglishHomePage() {
 
               <div className="flex gap-4 pt-4 flex-wrap justify-center">
                 <a
-                  href="tel:+498928803451"
+                  href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-primary"
                 >
                   Book Now
@@ -996,7 +998,12 @@ export default function EnglishHomePage() {
                   Reserve your table and experience the magic of authentic Vietnamese cuisine in a warm and welcoming atmosphere.
                 </p>
                 <div className="flex gap-4 justify-center pt-4 flex-wrap">
-                  <a href="tel:+498928803451" className="inline-flex items-center justify-center rounded-full bg-brand-accent/20 text-brand px-8 py-3 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                  <a
+                    href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full bg-brand-accent/20 text-brand px-8 py-3 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
                     Reserve
                   </a>
                   <a href="#speisekarte" className="inline-flex items-center justify-center rounded-full border-2 border-white text-white px-8 py-3 font-semibold hover:bg-brand-light/10 transition-all duration-300">
