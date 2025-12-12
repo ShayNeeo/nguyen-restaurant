@@ -629,8 +629,13 @@ export default function VietnameseHomePage() {
                 <a href="#speisekarte" className="btn-primary">
                   Khám phá thực đơn
                 </a>
-                <a href="tel:+498928803451" className="btn-light">
-                  089 28803451
+                <a
+                  href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-light"
+                >
+                  Đặt bàn
                 </a>
               </div>
             </div>
