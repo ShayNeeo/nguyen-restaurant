@@ -617,8 +617,8 @@ export default function EnglishHomePage() {
                 </span>
               </div>
 
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-brand-dark leading-tight">
-                NGUYEN<br /><span className="text-brand">Vietnam Restaurant</span>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold leading-tight">
+                <span className="text-brand">NGUYEN</span><br /><span className="text-brand">Vietnam Restaurant</span>
               </h1>
 
               <p className="text-lg sm:text-xl text-brand-dark/80 max-w-2xl mx-auto leading-relaxed font-light">
@@ -836,7 +836,7 @@ export default function EnglishHomePage() {
                     Discover Menu
                   </a>
                   <a
-                    href="https://eat.allo.restaurant/restaurant/nguyen-vietnam-restaurant-munchen"
+                    href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-light"

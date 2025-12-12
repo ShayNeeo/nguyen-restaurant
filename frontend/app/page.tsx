@@ -199,7 +199,7 @@ function CarouselSection() {
                 Speisekarte entdecken
               </a>
               <a
-                href="https://eat.allo.restaurant/restaurant/nguyen-vietnam-restaurant-munchen"
+                href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-light"
@@ -792,8 +792,8 @@ export default function HomePage() {
                 </span>
               </div>
 
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-brand-dark leading-tight">
-                NGUYEN<br /><span className="text-brand">Vietnam Restaurant</span>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold leading-tight">
+                <span className="text-brand">NGUYEN</span><br /><span className="text-brand">Vietnam Restaurant</span>
               </h1>
 
               <p className="text-lg sm:text-xl text-brand-dark/80 max-w-2xl mx-auto leading-relaxed font-light">
@@ -806,7 +806,7 @@ export default function HomePage() {
                   Speisekarte erkunden
                 </a>
                 <a
-                  href="https://eat.allo.restaurant/restaurant/nguyen-vietnam-restaurant-munchen"
+                  href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-light"
@@ -1031,7 +1031,7 @@ export default function HomePage() {
                     Speisekarte entdecken
                   </a>
                   <a
-                    href="https://eat.allo.restaurant/restaurant/nguyen-vietnam-restaurant-munchen"
+                    href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-light"
@@ -1070,7 +1070,7 @@ export default function HomePage() {
 
               <div className="flex gap-4 pt-4 flex-wrap justify-center">
                 <a
-                  href="https://eat.allo.restaurant/restaurant/nguyen-vietnam-restaurant-munchen"
+                  href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary"
@@ -1173,7 +1173,7 @@ export default function HomePage() {
                   <h3 className="text-2xl font-display font-bold mb-4">Reservierungen</h3>
                   <p className="text-lg font-semibold mb-3">089 28803451</p>
                   <a
-                    href="https://eat.allo.restaurant/restaurant/nguyen-vietnam-restaurant-munchen"
+                    href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block px-6 py-2 bg-brand-light text-brand font-bold rounded-full hover:bg-brand-accent/20 transition-colors duration-300"
@@ -1199,7 +1199,7 @@ export default function HomePage() {
                 </p>
                 <div className="flex gap-4 justify-center pt-4 flex-wrap">
                   <a
-                    href="https://eat.allo.restaurant/restaurant/nguyen-vietnam-restaurant-munchen"
+                    href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center rounded-full bg-amber-100 text-brand px-8 py-3 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
