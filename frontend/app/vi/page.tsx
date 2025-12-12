@@ -1012,7 +1012,7 @@ export default function VietnameseHomePage() {
                     href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-brand-accent/20 text-brand px-8 py-3 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                    className="inline-flex items-center justify-center rounded-full bg-amber-100 text-brand px-8 py-3 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
                     Đặt bàn
                   </a>
