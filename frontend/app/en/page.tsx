@@ -977,8 +977,13 @@ export default function EnglishHomePage() {
                 <div className="bg-gradient-to-br from-brand to-brand-accent rounded-2xl p-8 shadow-soft text-white">
                   <h3 className="text-2xl font-display font-bold mb-4">Reservations</h3>
                   <p className="text-lg font-semibold mb-3">089 28803451</p>
-                  <a href="tel:+498928803451" className="inline-block px-6 py-2 bg-white text-brand font-bold rounded-full hover:bg-brand-accent/20 transition-colors duration-300">
-                    Call Now
+                  <a
+                    href="https://reservations.allo.restaurant/de/nguyen-vietnam-restaurant-munchen"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block px-6 py-2 bg-brand-light text-brand font-bold rounded-full hover:bg-brand-accent/20 transition-colors duration-300"
+                  >
+                    Reserve Now
                   </a>
                 </div>
               </ScrollReveal>
