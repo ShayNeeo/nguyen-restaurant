@@ -32,23 +32,7 @@ const navLinks = {
 
 export function NavBar({ lang = "de" }: NavBarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const [atTop, setAtTop] = useState(true);
-  const lastScroll = useRef(0);
-
   const links = navLinks[lang];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const current = window.scrollY;
-      setAtTop(current < 16);
-      setHidden(current > lastScroll.current && current > 120);
-      lastScroll.current = current;
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     if (mobileOpen) {
@@ -59,12 +43,11 @@ export function NavBar({ lang = "de" }: NavBarProps) {
   }, [mobileOpen]);
 
   const baseClasses =
-    "fixed inset-x-0 top-0 z-50 border-b border-brand-light/10 transition-transform duration-300";
-  const background = atTop ? "bg-transparent" : "bg-brand/80 backdrop-blur";
+    "fixed inset-x-0 top-0 z-50 border-b border-brand-light/10 bg-brand/90 backdrop-blur transition-all duration-300";
 
   return (
     <>
-      <header className={`${baseClasses} ${background} ${hidden ? "-translate-y-full" : "translate-y-0"}`}>
+      <header className={baseClasses}>
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
           <Link
             href={lang === "de" ? "/" : `/${lang}`}
