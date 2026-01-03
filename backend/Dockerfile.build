@@ -1,5 +1,5 @@
 # Build Stage
-FROM rust:1.80-slim-bullseye AS builder
+FROM rust:1.83-slim-bookworm AS builder
 
 WORKDIR /app
 
@@ -27,13 +27,13 @@ COPY backend ./backend
 RUN cargo build --release --manifest-path ./backend/Cargo.toml
 
 # Final Stage
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 WORKDIR /app
 
 # Install runtime dependencies
 RUN apt-get update && apt-get install -y \
-    libssl1.1 \
+    libssl3 \
     libsqlite3-0 \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
