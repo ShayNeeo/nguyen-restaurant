@@ -1,2 +1,2 @@
-FROM ghcr.io/shayneeo/nguyen-restaurant-backend:latest
+FROM ghcr.io/ShayNeeo/nguyen-restaurant-backend:latest
 LABEL com.centurylinklabs.watchtower.enable="true"
