@@ -1,0 +1,53 @@
+# Build Stage
+FROM rust:1.80-slim-bullseye AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    pkg-config \
+    libssl-dev \
+    libsqlite3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy manifests
+COPY backend/Cargo.toml ./backend/
+# Note: Cargo.lock is ignored in this repo, so it might not be present
+
+# Create a dummy main.rs to build dependencies
+RUN mkdir -p ./backend/src && \
+    echo "fn main() {}" > ./backend/src/main.rs && \
+    cargo build --release --manifest-path ./backend/Cargo.toml && \
+    rm -rf ./backend/src
+
+# Copy source code
+COPY backend ./backend
+
+# Build the application
+RUN cargo build --release --manifest-path ./backend/Cargo.toml
+
+# Final Stage
+FROM debian:bullseye-slim
+
+WORKDIR /app
+
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y \
+    libssl1.1 \
+    libsqlite3-0 \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the binary
+# Using the name from Cargo.toml: restaurent-backend
+COPY --from=builder /app/backend/target/release/restaurent-backend /usr/local/bin/restaurent-backend
+
+# Copy migrations if any
+COPY backend/migrations ./migrations
+
+# Expose port
+EXPOSE 3000
+
+ENV RUST_LOG=info
+
+CMD ["restaurent-backend"]

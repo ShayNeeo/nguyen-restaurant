@@ -34,7 +34,8 @@ const nextConfig = {
     };
     return config;
   },
-  pageExtensions: ['tsx', 'ts', 'jsx', 'js']
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
+  output: 'standalone',
 };
 
 export default nextConfig;
