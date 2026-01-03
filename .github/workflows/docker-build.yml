@@ -65,16 +65,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Downcase Image Name
+      - name: Set up Image Name
+        id: prep
         run: |
           REPO_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')
-          echo "FULL_IMAGE_NAME=${{ env.REGISTRY }}/${REPO_OWNER}/${{ matrix.image_name }}" >> $GITHUB_ENV
+          echo "image_name=${{ env.REGISTRY }}/${REPO_OWNER}/${{ matrix.image_name }}" >> $GITHUB_OUTPUT
 
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.FULL_IMAGE_NAME }}
+          images: ${{ steps.prep.outputs.image_name }}
           tags: type=sha,format=short
 
       - name: Build and push
@@ -84,7 +85,7 @@ jobs:
           file: ${{ matrix.file }}
           push: true
           platforms: ${{ matrix.platform }}
-          tags: ${{ env.FULL_IMAGE_NAME }}:${{ github.sha }}${{ matrix.tag_suffix }}
+          tags: ${{ steps.prep.outputs.image_name }}:${{ github.sha }}${{ matrix.tag_suffix }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -112,14 +113,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Downcase Image Name
+      - name: Set up Image Name
+        id: prep
         run: |
           REPO_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')
-          echo "FULL_IMAGE_NAME=${{ env.REGISTRY }}/${REPO_OWNER}/${{ matrix.image_name }}" >> $GITHUB_ENV
+          echo "image_name=${{ env.REGISTRY }}/${REPO_OWNER}/${{ matrix.image_name }}" >> $GITHUB_OUTPUT
 
       - name: Create and push manifest list
         run: |
-          IMAGE="${{ env.FULL_IMAGE_NAME }}"
+          IMAGE="${{ steps.prep.outputs.image_name }}"
           SHA="${{ github.sha }}"
           
           # Create manifest for SHA tag
