@@ -51,22 +51,30 @@ async fn send_email_with_html(state: &AppState, to: &str, subject: &str, body: &
         if is_html { "HTML" } else { "text" }, to, host, port, from);
 
     // Build email with appropriate content type
-    let content_type = if is_html {
-        lettre::message::header::ContentType::TEXT_HTML
-    } else {
-        lettre::message::header::ContentType::TEXT_PLAIN
-    };
-
-    let email = match Message::builder()
+    let email_builder = Message::builder()
         .from(from.parse()?)
         .to(to.parse()?)
-        .subject(subject)
-        .singlepart(
-            lettre::message::SinglePart::builder()
-                .header(content_type)
-                .body(body.to_string())
-        )
-    {
+        .subject(subject);
+
+    let email = if is_html {
+        let multipart = lettre::message::MultiPart::alternative()
+            .singlepart(
+                lettre::message::SinglePart::builder()
+                    .header(lettre::message::header::ContentType::TEXT_PLAIN)
+                    .body("Please view this email in an HTML-compatible client.".to_string())
+            )
+            .singlepart(
+                lettre::message::SinglePart::builder()
+                    .header(lettre::message::header::ContentType::TEXT_HTML)
+                    .body(body.to_string())
+            );
+        
+        email_builder.multipart(multipart)
+    } else {
+        email_builder.body(body.to_string())
+    };
+
+    let email = match email {
         Ok(msg) => msg,
         Err(e) => {
             tracing::error!("Failed to build email message: {:?}", e);
