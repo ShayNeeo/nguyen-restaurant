@@ -148,7 +148,8 @@ echo "[install] Running npm install..."
 npm install --legacy-peer-deps
 
 echo "[install] Fixing npm vulnerabilities..."
-npm audit fix --force --legacy-peer-deps --audit-level=moderate 2>/dev/null || true
+# npm audit fix --force --legacy-peer-deps --audit-level=moderate 2>/dev/null || true
+echo "[install] Skipped npm audit fix to avoid breaking changes."
 
 echo "[install] Building Next.js frontend..."
 echo "[install] Note: old-page.tsx is excluded from build (reserved for non-deployment use)"
