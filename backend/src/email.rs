@@ -57,21 +57,13 @@ async fn send_email_with_html(state: &AppState, to: &str, subject: &str, body: &
         .subject(subject);
 
     let email = if is_html {
-        let multipart = lettre::message::MultiPart::alternative()
-            .singlepart(
-                lettre::message::SinglePart::builder()
-                    .header(lettre::message::header::ContentType::TEXT_PLAIN)
-                    .body("Please view this email in an HTML-compatible client.".to_string())
-            )
-            .singlepart(
-                lettre::message::SinglePart::builder()
-                    .header(lettre::message::header::ContentType::TEXT_HTML)
-                    .body(body.to_string())
-            );
-        
-        email_builder.multipart(multipart)
+        email_builder
+            .header(lettre::message::header::ContentType::TEXT_HTML)
+            .body(body.to_string())
     } else {
-        email_builder.body(body.to_string())
+        email_builder
+            .header(lettre::message::header::ContentType::TEXT_PLAIN)
+            .body(body.to_string())
     };
 
     let email = match email {
