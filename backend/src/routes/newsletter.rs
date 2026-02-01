@@ -6,21 +6,26 @@ use axum::{
     http::{StatusCode, HeaderMap},
 };
 use std::sync::Arc;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use jsonwebtoken::{DecodingKey, Validation, decode};
 use sqlx::Row;
 use crate::state::AppState;
-use crate::email::send_html_email;
+use crate::email::{send_email, send_html_email};
 
 #[derive(Deserialize)]
 pub struct SubscribeRequest {
     email: String,
 }
 
+fn default_true() -> bool { true }
+
 #[derive(Deserialize)]
 pub struct SendNewsletterRequest {
     subject: String,
-    body_html: String,
+    #[serde(alias = "body_html")]
+    content: String,
+    #[serde(default = "default_true")]
+    is_html: bool,
 }
 
 #[derive(Deserialize)]
@@ -120,36 +125,41 @@ async fn send_newsletter(
     let mut fail_count = 0;
 
     for (sub_email,) in subscribers {
-        // Simple HTML wrapper if not provided
-        let full_html = if payload.body_html.contains("<html") {
-            payload.body_html.clone()
-        } else {
-            format!(
-                r#"<!DOCTYPE html>
-                <html>
-                <head>
-                    <meta charset="utf-8">
-                    <style>
-                        body {{ font-family: sans-serif; line-height: 1.6; color: #333; }}
-                        .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
-                        .footer {{ font-size: 12px; color: #777; margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px; }}
-                    </style>
-                </head>
-                <body>
-                    <div class="container">
-                        {}
-                        <div class="footer">
-                            <p>You are receiving this email because you subscribed to Nguyen Restaurant updates.</p>
-                            <p>Georgenstraße 67, 80799 München</p>
+        let result = if payload.is_html {
+            // Simple HTML wrapper if not provided
+            let full_html = if payload.content.contains("<html") {
+                payload.content.clone()
+            } else {
+                format!(
+                    r#"<!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="utf-8">
+                        <style>
+                            body {{ font-family: sans-serif; line-height: 1.6; color: #333; }}
+                            .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+                            .footer {{ font-size: 12px; color: #777; margin-top: 30px; border-top: 1px solid #eee; padding-top: 10px; }}
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            {}
+                            <div class="footer">
+                                <p>You are receiving this email because you subscribed to Nguyen Restaurant updates.</p>
+                                <p>Georgenstraße 67, 80799 München</p>
+                            </div>
                         </div>
-                    </div>
-                </body>
-                </html>"#,
-                payload.body_html
-            )
+                    </body>
+                    </html>"#,
+                    payload.content
+                )
+            };
+            send_html_email(&state, &sub_email, &payload.subject, &full_html).await
+        } else {
+            send_email(&state, &sub_email, &payload.subject, &payload.content).await
         };
 
-        match send_html_email(&state, &sub_email, &payload.subject, &full_html).await {
+        match result {
             Ok(_) => success_count += 1,
             Err(e) => {
                 tracing::error!("Failed to send newsletter to {}: {:?}", sub_email, e);

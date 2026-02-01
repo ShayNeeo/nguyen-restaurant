@@ -2,6 +2,7 @@ use crate::state::AppState;
 use anyhow::Result;
 use lettre::{Message, SmtpTransport, Transport};
 use lettre::transport::smtp::authentication::Credentials;
+use lettre::message::{header::ContentType, SinglePart};
 
 pub async fn send_email(state: &AppState, to: &str, subject: &str, body: &str) -> Result<()> {
     send_email_with_html(state, to, subject, body, false).await
@@ -56,17 +57,17 @@ async fn send_email_with_html(state: &AppState, to: &str, subject: &str, body: &
         .to(to.parse()?)
         .subject(subject);
 
-    let email = if is_html {
-        email_builder
-            .header(lettre::message::header::ContentType::TEXT_HTML)
+    let email_part = if is_html {
+        SinglePart::builder()
+            .header(ContentType::TEXT_HTML)
             .body(body.to_string())
     } else {
-        email_builder
-            .header(lettre::message::header::ContentType::TEXT_PLAIN)
+        SinglePart::builder()
+            .header(ContentType::TEXT_PLAIN)
             .body(body.to_string())
     };
 
-    let email = match email {
+    let email = match email_builder.singlepart(email_part) {
         Ok(msg) => msg,
         Err(e) => {
             tracing::error!("Failed to build email message: {:?}", e);
