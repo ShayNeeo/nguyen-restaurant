@@ -31,11 +31,29 @@ export function NewsletterSection({ content = defaultContent }: { content?: News
         e.preventDefault();
         setStatus("loading");
 
-        // Simulate API call
-        setTimeout(() => {
-            setStatus("success");
-            setEmail("");
-        }, 1500);
+        try {
+            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+            const response = await fetch(`${backendUrl}/api/newsletter/subscribe`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email }),
+            });
+
+            if (response.ok) {
+                setStatus("success");
+                setEmail("");
+            } else {
+                setStatus("error");
+                // Reset after error
+                setTimeout(() => setStatus("idle"), 3000);
+            }
+        } catch (error) {
+            console.error("Newsletter subscription failed:", error);
+            setStatus("error");
+            setTimeout(() => setStatus("idle"), 3000);
+        }
     };
 
     return (

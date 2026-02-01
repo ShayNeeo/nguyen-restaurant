@@ -48,7 +48,7 @@ export function NavBar({ lang = "de" }: NavBarProps) {
   return (
     <>
       <header className={baseClasses}>
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+        <div className="flex w-full items-center justify-between px-6 py-4 lg:px-12">
           <Link
             href={lang === "de" ? "/" : `/${lang}`}
             className="font-display text-2xl text-white drop-shadow transition hover:text-brand-accent"

@@ -18,6 +18,7 @@ export default function AdminSidebar({ activeTab, setActiveTab, onSignOut }: Adm
   const managementTabs = [
     { id: 'users-management', label: 'Manage Users', icon: '👥' },
     { id: 'coupons-management', label: 'Manage Coupons', icon: '🎟️' },
+    { id: 'newsletter', label: 'Newsletter', icon: '📧' },
   ];
 
   const systemTabs = [

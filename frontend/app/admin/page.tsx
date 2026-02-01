@@ -14,6 +14,7 @@ import AdminHealth from '@/components/admin/tabs/AdminHealth';
 import AdminSettings from '@/components/admin/tabs/AdminSettings';
 import AdminUsersManagement from '@/components/admin/tabs/AdminUsersManagement';
 import AdminCouponsManagement from '@/components/admin/tabs/AdminCouponsManagement';
+import AdminNewsletter from '@/components/admin/tabs/AdminNewsletter';
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -73,6 +74,7 @@ export default function AdminPage() {
           {activeTab === 'giftcodes' && <AdminGiftCoupons />}
           {activeTab === 'users-management' && <AdminUsersManagement />}
           {activeTab === 'coupons-management' && <AdminCouponsManagement />}
+          {activeTab === 'newsletter' && <AdminNewsletter />}
           {activeTab === 'health' && <AdminHealth />}
           {activeTab === 'settings' && <AdminSettings user={user} />}
         </div>
