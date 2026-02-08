@@ -169,7 +169,7 @@ if [ ! -f .env ]; then
   echo "# STRIPE_SECRET_KEY=sk_test_xxx" >> .env
   echo "# STRIPE_WEBHOOK_SECRET=whsec_xxx" >> .env
   echo "SMTP_HOST=smtp-relay.brevo.com" >> .env
-  echo "SMTP_PORT=587" >> .env
+  echo "SMTP_PORT=465" >> .env
   echo "# SMTP_USERNAME=your_brevo_username" >> .env
   echo "# SMTP_PASSWORD=your_brevo_password" >> .env
   echo "SMTP_FROM=Your Name <no-reply@example.com>" >> .env

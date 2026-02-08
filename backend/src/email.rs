@@ -65,12 +65,13 @@ async fn send_email_with_html(state: &AppState, to: &str, subject: &str, body: &
     };
 
     // Build SMTP transport with proper error handling
+    let builder = SmtpTransport::relay(host)?;
     let builder = if port == 465 {
         // Implicit TLS (SMTPS)
-        SmtpTransport::relay(host)?.tls(Tls::Wrapper(TlsParameters::new(host.to_string())?))
+        builder.tls(Tls::Wrapper(TlsParameters::new(host.to_string())?))
     } else {
-        // STARTTLS (Default for relay)
-        SmtpTransport::relay(host)?
+        // STARTTLS (Standard for 587/2525)
+        builder.tls(Tls::Required(TlsParameters::new(host.to_string())?))
     };
 
     let mailer = builder

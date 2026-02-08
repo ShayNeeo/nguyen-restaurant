@@ -28,7 +28,7 @@ async fn main() {
         .or_else(|_| std::env::var("BACKEND_URL"))
         .unwrap_or_else(|_| "http://127.0.0.1:8080".into());
     let smtp_host = std::env::var("SMTP_HOST").ok();
-    let smtp_port = std::env::var("SMTP_PORT").ok().and_then(|v| v.parse().ok());
+    let smtp_port = std::env::var("SMTP_PORT").ok().and_then(|v| v.parse().ok()).or(Some(465));
     let smtp_username = std::env::var("SMTP_USERNAME").ok();
     let smtp_password = std::env::var("SMTP_PASSWORD").ok();
     let smtp_from = std::env::var("SMTP_FROM").ok();
