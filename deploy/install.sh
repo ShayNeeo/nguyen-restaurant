@@ -103,8 +103,10 @@ echo "[install] Setting up frontend .env..."
 rm -f .env.local
 
 # Determine backend URL based on DOMAIN
-if [ -n "$DOMAIN" ]; then
-  BACKEND_URL="https://$DOMAIN"
+if [ -n "${DOMAIN:-}" ]; then
+  # Use the first domain if multiple are provided
+  PRIMARY_DOM=$(echo "$DOMAIN" | cut -d',' -f1 | tr -d ' ')
+  BACKEND_URL="https://$PRIMARY_DOM"
 else
   BACKEND_URL="http://127.0.0.1:8080"
 fi

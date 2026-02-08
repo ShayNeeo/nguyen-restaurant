@@ -3,6 +3,7 @@ use anyhow::Result;
 use lettre::{Message, SmtpTransport, Transport};
 use lettre::transport::smtp::authentication::Credentials;
 use lettre::message::SinglePart;
+use lettre::transport::smtp::client::{Tls, TlsParameters};
 
 pub async fn send_email(state: &AppState, to: &str, subject: &str, body: &str) -> Result<()> {
     send_email_with_html(state, to, subject, body, false).await
@@ -64,15 +65,16 @@ async fn send_email_with_html(state: &AppState, to: &str, subject: &str, body: &
     };
 
     // Build SMTP transport with proper error handling
-    let mailer = match SmtpTransport::relay(host) {
-        Ok(transport) => transport.port(port),
-        Err(e) => {
-            tracing::error!("Failed to create SMTP transport for {}: {:?}", host, e);
-            return Err(anyhow::anyhow!("Failed to create SMTP transport: {:?}", e));
-        }
+    let builder = if port == 465 {
+        // Implicit TLS (SMTPS)
+        SmtpTransport::relay(host)?.tls(Tls::Wrapper(TlsParameters::new(host.to_string())?))
+    } else {
+        // STARTTLS (Default for relay)
+        SmtpTransport::relay(host)?
     };
 
-    let mailer = mailer
+    let mailer = builder
+        .port(port)
         .credentials(Credentials::new(username.clone(), password.clone()))
         .build();
 
