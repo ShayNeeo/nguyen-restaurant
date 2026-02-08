@@ -13,18 +13,21 @@ const navLinks = {
   de: [
     { label: "Über uns", href: "#geschichten" },
     { label: "Speisekarte", href: "#speisekarte" },
+    { label: "Menü", href: "/menu" },
     { label: "Unser Restaurant", href: "#gallery" },
     { label: "Anfahrt", href: "/location" }
   ],
   en: [
     { label: "About Us", href: "#geschichten" },
-    { label: "Menu", href: "#speisekarte" },
+    { label: "Menu (Full)", href: "#speisekarte" },
+    { label: "Menu", href: "/menu" },
     { label: "Our Restaurant", href: "#gallery" },
     { label: "Location", href: "/en/location" }
   ],
   vi: [
     { label: "Về chúng tôi", href: "#geschichten" },
     { label: "Thực đơn", href: "#speisekarte" },
+    { label: "Thực đơn (Full)", href: "/menu" },
     { label: "Nhà hàng", href: "#gallery" },
     { label: "Địa chỉ", href: "/vi/location" }
   ]
@@ -56,7 +59,7 @@ export function NavBar({ lang = "de" }: NavBarProps) {
             Nguyen Restaurant
           </Link>
 
-          <nav className="hidden items-center gap-4 text-sm font-medium text-white sm:flex">
+          <nav className="hidden items-center gap-6 text-base font-medium text-white sm:flex">
             {links.map((link) => (
               <a
                 key={link.href}
@@ -68,11 +71,11 @@ export function NavBar({ lang = "de" }: NavBarProps) {
             ))}
 
             <LanguageSwitcher />
-            <CartButton />
+            {/* <CartButton /> */}
           </nav>
 
           <div className="flex items-center gap-3 sm:hidden">
-            <CartButton />
+            {/* <CartButton /> */}
             <button
               type="button"
               aria-label={mobileOpen ? "Navigation schließen" : "Navigation öffnen"}

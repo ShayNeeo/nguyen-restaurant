@@ -26,6 +26,7 @@ pub struct SendNewsletterRequest {
     content: String,
     #[serde(default = "default_true")]
     is_html: bool,
+    recipients: Option<Vec<String>>,
 }
 
 #[derive(Deserialize)]
@@ -35,7 +36,35 @@ struct Claims { sub: String, email: String, exp: usize }
 pub fn router() -> Router {
     Router::new()
         .route("/api/newsletter/subscribe", post(subscribe))
+        .route("/api/admin/newsletter/subscribers", axum::routing::get(get_subscribers))
         .route("/api/admin/newsletter/send", post(send_newsletter))
+}
+
+async fn get_subscribers(
+    Extension(state): Extension<Arc<AppState>>,
+    headers: HeaderMap,
+) -> impl IntoResponse {
+    let email = match extract_email_from_token(&headers, &state) {
+        Some(e) => e,
+        None => return (StatusCode::UNAUTHORIZED, "Unauthorized").into_response(),
+    };
+
+    if !is_admin_user(&email, &state).await {
+        return (StatusCode::FORBIDDEN, "Forbidden").into_response();
+    }
+
+    let subscribers: Vec<String> = match sqlx::query("SELECT email FROM newsletter_subscribers")
+        .fetch_all(&state.pool)
+        .await 
+    {
+        Ok(rows) => rows.iter().map(|r| r.get::<String, _>(0)).collect(),
+        Err(e) => {
+            tracing::error!("Failed to fetch subscribers: {:?}", e);
+            return (StatusCode::INTERNAL_SERVER_ERROR, "Failed to fetch subscribers").into_response();
+        }
+    };
+
+    Json(subscribers).into_response()
 }
 
 async fn subscribe(
@@ -104,15 +133,19 @@ async fn send_newsletter(
         return (StatusCode::FORBIDDEN, "Forbidden").into_response();
     }
 
-    // 1. Fetch all subscribers
-    let subscribers: Vec<(String,)> = match sqlx::query_as("SELECT email FROM newsletter_subscribers")
-        .fetch_all(&state.pool)
-        .await 
-    {
-        Ok(subs) => subs,
-        Err(e) => {
-            tracing::error!("Failed to fetch subscribers: {:?}", e);
-            return (StatusCode::INTERNAL_SERVER_ERROR, "Failed to fetch subscribers").into_response();
+    // 1. Fetch all subscribers or use filtered list
+    let subscribers: Vec<String> = if let Some(recipients) = payload.recipients {
+        recipients
+    } else {
+        match sqlx::query_as::<sqlx::Sqlite, (String,)>("SELECT email FROM newsletter_subscribers")
+            .fetch_all(&state.pool)
+            .await 
+        {
+            Ok(subs) => subs.into_iter().map(|s| s.0).collect(),
+            Err(e) => {
+                tracing::error!("Failed to fetch subscribers: {:?}", e);
+                return (StatusCode::INTERNAL_SERVER_ERROR, "Failed to fetch subscribers").into_response();
+            }
         }
     };
 
@@ -124,7 +157,7 @@ async fn send_newsletter(
     let mut success_count = 0;
     let mut fail_count = 0;
 
-    for (sub_email,) in subscribers {
+    for sub_email in subscribers {
         let result = if payload.is_html {
             // Simple HTML wrapper if not provided
             let full_html = if payload.content.contains("<html") {

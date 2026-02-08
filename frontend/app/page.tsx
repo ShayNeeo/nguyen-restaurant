@@ -616,9 +616,9 @@ export default function HomePage() {
         const response = await fetch(`${backendUrl}/api/products`);
         if (response.ok) {
           const data = (await response.json()) as ProductsResponse;
-          // Shuffle and take 11 random products for homepage
+          // Shuffle and take 8 random products for homepage (3x3 grid with "View All" card)
           const shuffled = [...data.products].sort(() => Math.random() - 0.5);
-          setProducts(shuffled.slice(0, 11));
+          setProducts(shuffled.slice(0, 8));
         }
       } catch (error) {
         console.error("Fehler beim Laden der Produkte:", error);
